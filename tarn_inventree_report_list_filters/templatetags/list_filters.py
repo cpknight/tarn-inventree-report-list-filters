@@ -1,6 +1,15 @@
+"""Custom template filters for InvenTree report/label templates.
+
+These filters are registered against InvenTree's built-in 'report' template
+library in apps.py ready(), so they are available via {% load report %}.
+
+They are also available via {% load list_filters %} as a standalone library.
+"""
+
 from django import template
 
 register = template.Library()
+
 
 @register.filter
 def split(value, arg):
@@ -8,6 +17,7 @@ def split(value, arg):
     if not value:
         return []
     return [x.strip() for x in str(value).split(arg)]
+
 
 @register.filter
 def replace(value, arg):
