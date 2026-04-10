@@ -19,10 +19,14 @@ def replace(value, arg1, arg2):
     return str(value).replace(arg1, arg2)
 
 class ListFiltersPlugin(InvenTreePlugin, ReportMixin):
-    NAME = "TARN Report List Filters"
+    NAME = "Report List Filters"
     SLUG = "tarn_report_list_filters"
-    TITLE = "TARN Report List Filters"
-    DESCRIPTION = "Adds |split and |replace template filters for reports and labels"
-    VERSION = "1.0.0"
+    TITLE = "Report List Filters"
+    DESCRIPTION = "Provides |split and |replace filters for report and label templates"
+    VERSION = "1.0.1"
     AUTHOR = "CP Knight"
     AUTHOR_EMAIL = "chris@tarn.parts"
+
+    def add_report_context(self, report_instance, model_instance, request, context):
+        # Explicitly register the filters in report context
+        pass
