@@ -2,8 +2,8 @@ from setuptools import setup, find_packages
 
 setup(
     name="tarn-inventree-report-list-filters",
-    version="1.2.0",
-    description="Adds |split and |replace template filters to InvenTree reports and labels",
+    version="1.3.0",
+    description="Adds |tarn_split and |tarn_replace template filters to InvenTree reports and labels",
     author="CP Knight",
     author_email="chris@tarn.parts",
     packages=find_packages(),
