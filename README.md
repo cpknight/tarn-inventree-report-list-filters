@@ -1,20 +1,20 @@
-# Tarn InvenTree Report List Filters
+# :mountain: Tarn InvenTree Report List Filters
 
 An [InvenTree](https://inventree.org/) plugin that adds two template tags for
 use in report and label templates:
 
-- **`{% tarn_split %}`** — splits a delimited string into a list you can iterate
-- **`{% tarn_replace %}`** — replaces all occurrences of a substring
+| Tag | What it does |
+|---|---|
+| **`{% tarn_split %}`** | Splits a delimited string into a list you can iterate with `{% for %}` |
+| **`{% tarn_replace %}`** | Replaces all occurrences of a substring |
 
-The tags are registered directly against InvenTree's built-in `report` template
-library, so they are available in any template that uses `{% load report %}`.
-Both tags can be individually enabled or disabled from the Plugin Settings page
-in InvenTree's Admin Center.
+:white_check_mark: Tags are available via `{% load report %}` — no extra `{% load %}` needed
+:gear: Each tag can be toggled on/off from **Plugin Settings** in the Admin Center
+:shield: Errors are handled gracefully — safe defaults are returned instead of crashing reports
 
-All errors are handled gracefully — if something goes wrong the tag returns a
-safe default and logs a warning instead of crashing the report.
+---
 
-## Installation
+## :package: Installation
 
 1. Go to **Admin Center → Plugins → Install Plugin**
 2. Fill in the form:
@@ -25,27 +25,31 @@ safe default and logs a warning instead of crashing the report.
 4. Enable the plugin in the plugins list
 5. Restart InvenTree: `sudo inventree restart`
 
-## Configuration
+---
+
+## :gear: Configuration
 
 After enabling the plugin, go to **Admin Center → Plugin Settings → Tarn
 Report List Filters**. Two toggle settings are available:
 
-- **Enable tarn_split** (default: on) — controls the `{% tarn_split %}` tag
-- **Enable tarn_replace** (default: on) — controls the `{% tarn_replace %}` tag
+| Setting | Default | Effect when disabled |
+|---|---|---|
+| **Enable tarn_split** | :white_check_mark: On | Returns the original value as a single-element list |
+| **Enable tarn_replace** | :white_check_mark: On | Returns the original value unchanged |
 
-Disabling a tag causes it to return the original value unchanged.
+---
 
-## Usage
+## :memo: Usage
 
 Both tags use Django's `{% simple_tag %}` syntax with the `as` keyword to
 assign the result to a template variable. This is the same pattern used by
 InvenTree's built-in helpers like `{% getindex %}` and `{% filter_queryset %}`.
 
-### tarn_split
+### :scissors: tarn_split
 
 Splits a string by a delimiter and returns a list of trimmed strings.
 
-```
+```html
 {% load report %}
 
 {% part_parameter part "features" as features %}
@@ -58,27 +62,31 @@ Splits a string by a delimiter and returns a list of trimmed strings.
 </ul>
 ```
 
-Arguments:
-- `value` — the string to split
-- `delimiter` — the separator (default `"|"` if omitted)
+| Argument | Description | Default |
+|---|---|---|
+| `value` | The string to split | *(required)* |
+| `delimiter` | The separator character(s) | `"|"` |
 
-### tarn_replace
+### :arrows_counterclockwise: tarn_replace
 
 Replaces all occurrences of a substring.
 
-```
+```html
 {% load report %}
 
 {% tarn_replace part.description "|" ", " as cleaned %}
 <p>{{ cleaned }}</p>
 ```
 
-Arguments:
-- `value` — the original string
-- `old` — the substring to find
-- `new` — the replacement (default `""` if omitted, i.e. deletion)
+| Argument | Description | Default |
+|---|---|---|
+| `value` | The original string | *(required)* |
+| `old` | The substring to find | *(required)* |
+| `new` | The replacement string | `""` (deletion) |
 
-## How It Works
+---
+
+## :wrench: How It Works
 
 The plugin registers `tarn_split` and `tarn_replace` as `simple_tag` functions
 on InvenTree's `report.templatetags.report` library at import time. This means
@@ -88,10 +96,26 @@ automatically when you `{% load report %}`.
 This approach follows the recommendation from InvenTree core maintainers
 (GitHub issue [#5052](https://github.com/inventree/InvenTree/issues/5052)).
 
-## License
+---
+
+## :page_facing_up: License
 
 MIT
 
-## Authors
+---
 
-Project Tarn contributors
+## :busts_in_silhouette: Authors
+
+[Project Tarn](https://tarn.parts) contributors, with development assistance
+from [Oz](https://warp.dev) (Warp AI).
+
+### About Project Tarn
+
+[The Tarn Project](https://tarn.parts) is developing the **Tarn Production
+System (TPS)** — a modular microfactory designed to make small-scale
+manufacturing more practical and less dependent on large centralised facilities
+and long supply chains. TPS is built so that a single operator can manage
+meaningful production volumes, from design through to packaging, without
+requiring massive capital or dedicated buildings. The system is built around
+self-hosted management and control (including InvenTree) that keeps inventory,
+scheduling, quality records, and critical data under local control.
