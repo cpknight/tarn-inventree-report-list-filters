@@ -1,1 +1,2 @@
 include README.md
+recursive-include tarn_inventree_report_list_filters/templatetags *.py
