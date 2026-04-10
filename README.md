@@ -13,11 +13,13 @@ This plugin adds two very useful template filters for InvenTree reports and labe
 {% endfor %}
 ```
 
-## Installation
+## Installation via Admin Center
 
-- Go to `Admin Center` → `Plugins` → `Install Plugin`
-- Enter this GitHub URL: `https://github.com/cpknight/tarn-inventree-report-list-filters`
-- Install and enable the plugin
-- Restart InvenTree (`sudo inventree restart`)
-
-Now you can create clean bullet lists from pipe-separated parameters.
+- Go to Admin Center → Plugins → Install Plugin
+- Fill in the form as follows:
+  - Package Name: `tarn-inventree-report-list-filters`
+  - Source URL: `git+https://github.com/cpknight/tarn-inventree-report-list-filters.git`
+  - Version: (leave blank)
+- Check `"Confirm plugin installation"`, Click `Install`
+- After installation, enable the plugin in the plugins list
+- Restart InvenTree with: `sudo inventree restart`
